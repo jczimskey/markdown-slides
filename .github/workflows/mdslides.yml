@@ -27,7 +27,7 @@ jobs:
 
     - name: Generate slides
       run: |
-       PATH="$HOME/.local/bin:$PATH"
+       echo "PATH=$HOME/.local/bin:$PATH" >> $GITHUB_ENV
         mdslides ${{ github.event.inputs.filename }} --output-dir ./slides
 
     - name: Upload slides
