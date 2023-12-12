@@ -28,7 +28,7 @@ jobs:
     - name: Generate slides
       run: |
        echo "PATH=$HOME/.local/bin:$PATH" >> $GITHUB_ENV
-        mdslides [-h] [--include media] [--pdf] [--output_dir DIR] ${{ github.event.inputs.filename }}
+       mdslides --include media --pdf --output_dir DIR ${{ github.event.inputs.filename }}
 
     - name: Upload slides
       uses: actions/upload-artifact@v2
