@@ -1,0 +1,35 @@
+name: Generate Slides
+
+on: 
+  workflow_dispatch:
+    inputs:
+      filename:
+        description: 'The name of the markdown file'     
+        default: 'presentation.md'     
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mdslides
+
+    - name: Generate slides
+      run: mdslides ${{ github.event.inputs.filename }} --output_dir ./slides
+
+    - name: Upload slides
+      uses: actions/upload-artifact@v2
+      with:
+        name: slides
+        path: ./slides
